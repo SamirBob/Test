@@ -1,0 +1,42 @@
+Git是目前最先进的分布式版本控制系统
+以Ubuntu系统为例
+一、建立仓库，并提交项目文件
+1、安装git：sudo apt-get install git
+2、进行用户配置：
+    git config  --global  user.name "Your Name" //你的名字
+    git config  --global  user.email "email@example.com" //你的邮箱地址
+3、将预建目录变成Git可管理仓库:
+    git init
+4、在目录下创建项目，项目完成
+5、添加到仓库：
+    git add . //添加仓库内的所有文件
+    git add ***.txt //添加单个文件到仓库
+6、提交文件到仓库：
+    git commit -m "提交说明文档" //-m 后面输入本次提交的说明
+7、查看提交结果：
+    git status //可以查看当前仓库的一个状态
+    
+二、修改项目后要执行的步骤
+1、如果项目文件有改动，使用git status 可以查看当前仓库的修改是否有提交和进行修改
+2、如果项目文件做了修改，可以使用git diff 查看当前都修改了那些文件
+3、确认之前的修改，就可以使用git add 和 git commit -m "更改记录" 来提交文件的修改了
+4、如果进行了多次的修改提交，要看每一次的提交记录，使用git log，git log 命令会显示从近到远的提交
+日志。
+
+三、回退版本
+1、如果需要回退版本的话，可以使用git log查看当前的一个提交记录，获取需要回退版本的HEAD_ID
+2、然后使用git reset --hard HEAD来回退版本
+3、git reflog 可以获取命令历史
+
+四、比较提交版本和当前工作区文件的修改记录
+1、git diff HEAD -- ***.txt
+五、删除文件
+1、当在工作区删除一个文件时，rm **.txt
+现在存在两个选择：
+1、确实要从版本库中删除该文件，使用命令：git rm **.txt;git commit -m "  ";
+2、删错了想要恢复文件，使用命令：git checkout -- **.txt
+六、其他的一些操作
+1、当你改乱了工作区某个文件的内容，想要直接丢弃工作区的修改时，用命令：git checkout -- file
+2、当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改：
+   git reset HEAD <file>
+   git checkout -- file
