@@ -1,0 +1,50 @@
+Android下常用的命令：
+1、关闭selinux权限：adb shell setenforce 0
+2、查看input设备的输入输出：adb shell getevent
+3、查看内核的实时打印LOG：adb cat proc/kmsg
+4、保存内核的实时打印LOG：adb shell cat proc/kmsg > 电脑目录
+5、修改firmware分区的读写权限：adb shell mount -t vfat -o rw,remount /firmware
+6、高通的QSEE的LOG：cat /d/tzdbg/qsee_log
+7、通过死循环抓取kmsg的LOG：while true;do cat proc/kmsg |grep xxx;done;
+Android下常用Debug命令：
+一、adb shell下查看内核信息
+	cat /proc/kmsg
+二、adb logcat过滤功能
+	adb logcat -s "TAG" //过滤TAG
+三、获取运行内存/CPU信息
+	adb shell
+	cat /proc/meminfo
+	cat /proc/cpuinfo
+四、抓取Logcat信息及kmsg信息
+	cat proc/kmsg > /data/kmsg.txt
+	logcat -v time > /data/logcat.txt
+五、查看Android设备信息
+	adb shell dumpsys package > package.xml
+六、输出所有已经安装的应用
+	adb shell pm list packages -f
+七、清除logcat缓冲区
+	adb logcat -c
+八、挂载system分区
+	adb remount
+九、从电脑上发送文件到设备
+	adb push <本地路径> <远程路径>
+十、从设备上下载文件到电脑
+	adb pull <远程路径> <本地路径>
+十一、dmsg抓取
+	adb shell dmesg > dmesg.txt
+十二、安装软件
+	adb install [-r] [-s] <file>
+	-r:强制安装	-s：将APK文件安装在SD-Card
+十三、卸载软件
+	adb uninstall [-k] <软件名>
+	-k：为卸载软件但是保留配置和缓存文件
+十四、打印运行log
+	adb logcat -b main -v time>app.log 打印应用程序的log
+	adb logcat -b radio -v time> radio.log 打印射频相关的log，SIM STK也会在里面，modem相关的ATcommand等
+	adb logcat -b events -v time  打印系统事件的日志，比如触屏事件。。。
+十五、抓取内核信息
+	adb shell cat /proc/kmsg>kernel.log
+	adb shell dmesg
+	adb shell cat kmsg
+十八、杀死adb
+	adb kill-server
